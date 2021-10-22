@@ -19,7 +19,7 @@ const SpreadsheetCell = (props: ISpreadsheetCellProps) => {
       {isSelected ? (
         <Input type="text" value={cell.value} onChange={handleValueChange} />
       ) : (
-        <Label>{cell.value}</Label>
+        <Label>{cell.evaluatedValue}</Label>
       )}
     </Wrapper>
   );

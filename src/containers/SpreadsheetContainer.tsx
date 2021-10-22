@@ -1,3 +1,4 @@
+import { evaluate } from 'mathjs';
 import React, { useState } from 'react';
 
 import { ICell } from '../interfaces/Cell';
@@ -9,6 +10,7 @@ const createArray = () => {
     array.push({
       id: `A${i}`,
       value: '10',
+      evaluatedValue: '10'
     });
   }
   return array;
@@ -22,15 +24,23 @@ const SpreadsheetContainer = () => {
   const handleCellValueChange = (cellId: string, newValue: string) => {
     const updatedCells = cells.map((cell) => {
       if (cell.id === cellId) {
+        let evaluatedValue: string;
+        try {
+          evaluatedValue = evaluate(newValue)
+        } catch {
+          evaluatedValue = newValue;
+        }
         return {
           ...cell,
           value: newValue,
+          evaluatedValue,
         };
       }
       return cell;
     });
     setCells(updatedCells);
   };
+
 
   return (
     <Spreadsheet
