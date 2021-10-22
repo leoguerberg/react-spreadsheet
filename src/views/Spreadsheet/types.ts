@@ -6,3 +6,8 @@ export interface ISpreadsheetProps {
   onCellSelected: (cellId: string) => void;
   onCellValueChange: (cellId: string, newValue: string) => void;
 }
+
+export interface ICellWrapperProps {
+  row: number;
+  column: number;
+}
