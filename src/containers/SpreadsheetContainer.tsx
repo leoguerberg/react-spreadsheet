@@ -24,12 +24,13 @@ const SpreadsheetContainer = () => {
   const handleCellValueChange = (cellId: string, newValue: string) => {
     const updatedCells = cells.map((cell) => {
       if (cell.id === cellId) {
-        let evaluatedValue: string;
+        let evaluatedValue = newValue;
+        if(newValue.startsWith('=')){
         try {
-          evaluatedValue = evaluate(newValue)
+          evaluatedValue = evaluate(newValue.slice(1))
         } catch {
           evaluatedValue = newValue;
-        }
+        }}
         return {
           ...cell,
           value: newValue,
