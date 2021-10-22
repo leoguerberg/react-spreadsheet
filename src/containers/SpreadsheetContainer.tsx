@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 
 import { ICell } from '../interfaces/Cell';
-import Spreadsheet from '../views/spreadsheet';
+import Spreadsheet from '../views/Spreadsheet';
 
 const createArray = () => {
   let array: ICell[] = [];
-  for (let i = 1; i < 100; i++) {
+  for (let i = 1; i < 101; i++) {
     array.push({
       id: `A${i}`,
       value: '10',

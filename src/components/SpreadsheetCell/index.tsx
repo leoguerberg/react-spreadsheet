@@ -15,11 +15,11 @@ const SpreadsheetCell = (props: ISpreadsheetCellProps) => {
   };
 
   return (
-    <Wrapper>
+    <Wrapper onClick={handleCellClick}>
       {isSelected ? (
         <Input type="text" value={cell.value} onChange={handleValueChange} />
       ) : (
-        <Label onClick={handleCellClick}>{cell.value}</Label>
+        <Label>{cell.value}</Label>
       )}
     </Wrapper>
   );

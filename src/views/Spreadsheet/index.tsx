@@ -1,14 +1,14 @@
 import React from 'react';
 
 import SpreadsheetCell from '../../components/SpreadsheetCell';
-import { Wrapper } from './styles';
+import { SpreadsheetWrapper } from './styles';
 import { ISpreadsheetProps } from './types';
 
 const Spreadsheet = (props: ISpreadsheetProps) => {
   const { cells, selectedCellId, onCellSelected, onCellValueChange } = props;
 
   return (
-    <Wrapper>
+    <SpreadsheetWrapper>
       {cells.map((cell) => {
         return (
           <SpreadsheetCell
@@ -19,7 +19,7 @@ const Spreadsheet = (props: ISpreadsheetProps) => {
           />
         );
       })}
-    </Wrapper>
+    </SpreadsheetWrapper>
   );
 };
 
