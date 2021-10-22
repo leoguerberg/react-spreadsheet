@@ -8,12 +8,12 @@ import Spreadsheet from '../views/Spreadsheet';
 const createArray = () => {
   let array: ICell[] = [];
   for (let i = 1; i < 10; i++) {
-    for(let j = 1; j<10; j++ ){
+    for (let j = 1; j < 10; j++) {
       array.push({
-        id:`${getA1Notation(j)}${i}`,
+        id: `${getA1Notation(j)}${i}`,
         value: '10',
-        evaluatedValue: '10'
-      })
+        evaluatedValue: '10',
+      });
     }
   }
   return array;
@@ -28,12 +28,13 @@ const SpreadsheetContainer = () => {
     const updatedCells = cells.map((cell) => {
       if (cell.id === cellId) {
         let evaluatedValue = newValue;
-        if(newValue.startsWith('=')){
-        try {
-          evaluatedValue = evaluate(newValue.slice(1))
-        } catch {
-          evaluatedValue = newValue;
-        }}
+        if (newValue.startsWith('=')) {
+          try {
+            evaluatedValue = evaluate(newValue.slice(1));
+          } catch {
+            evaluatedValue = newValue;
+          }
+        }
         return {
           ...cell,
           value: newValue,

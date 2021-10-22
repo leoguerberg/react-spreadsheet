@@ -5,7 +5,7 @@ import { ISpreadsheetCellProps } from './types';
 
 const SpreadsheetCell = (props: ISpreadsheetCellProps) => {
   const { cell, isSelected, onCellSelected, onValueChange } = props;
- 
+
   const handleValueChange = (event: any) => {
     onValueChange(cell.id, event.target.value);
   };

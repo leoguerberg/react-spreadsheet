@@ -7,10 +7,10 @@ export const Wrapper = styled.div`
 `;
 
 export const Label = styled.div`
-    display: flex;
-    height: 100%;
-    align-items: center;
-    text-align: left;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  text-align: left;
 `;
 
 export const Input = styled.input`
