@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 
 import * as spreadsheetActions from '../redux/actions/spreadsheet.actions';
@@ -15,14 +15,11 @@ const SpreadsheetContainer = () => {
     dispatch(spreadsheetActions.onCellValueChange(cellId, newValue));
   };
 
-  const handleCellSelected = useCallback((cellId: ICellId) => {}, []);
-
   return (
     <Spreadsheet
       rowsCount={DEFAULT_ROWS_COUNT}
       columnCount={DEFAULT_COLUMNS_COUNT}
       spreadsheet={initializeCells()}
-      onCellSelected={handleCellSelected}
       onCellValueChange={handleCellValueChange}
     />
   );

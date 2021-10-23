@@ -7,7 +7,7 @@ import { CellWrapper, SpreadsheetWrapper } from './styles';
 import { ISpreadsheetProps } from './types';
 
 const Spreadsheet = (props: ISpreadsheetProps) => {
-  const { spreadsheet, rowsCount, columnCount, onCellSelected, onCellValueChange } = props;
+  const { spreadsheet, rowsCount, columnCount, onCellValueChange } = props;
 
   const rows = generateNumbersArray(rowsCount, 0);
   const columns = generateNumbersArray(columnCount, 0);
@@ -31,7 +31,6 @@ const Spreadsheet = (props: ISpreadsheetProps) => {
                   <CellWrapper row={rowNumber + 2} column={columnNumber + 2}>
                     <SpreadsheetCell
                       cell={spreadsheet[rowNumber][columnNumber]}
-                      onCellSelected={onCellSelected}
                       onValueChange={onCellValueChange}
                     />
                   </CellWrapper>

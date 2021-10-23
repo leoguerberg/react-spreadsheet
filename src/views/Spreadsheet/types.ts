@@ -4,7 +4,6 @@ export interface ISpreadsheetProps {
   spreadsheet: ICell[][];
   rowsCount: number;
   columnCount: number;
-  onCellSelected: (cellId: ICellId) => void;
   onCellValueChange: (cellId: ICellId, newValue: string) => void;
 }
 

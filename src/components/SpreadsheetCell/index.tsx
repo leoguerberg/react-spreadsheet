@@ -5,7 +5,7 @@ import { Input, Label, Wrapper } from './styles';
 import { ISpreadsheetCellProps } from './types';
 
 const SpreadsheetCell = (props: ISpreadsheetCellProps) => {
-  const { cell, onCellSelected, onValueChange } = props;
+  const { cell, onValueChange } = props;
   const cellId = `${cell.id.row}_${cell.id.col}`;
 
   const [isEditMode, setIsEditMode] = useState(false);
@@ -18,7 +18,6 @@ const SpreadsheetCell = (props: ISpreadsheetCellProps) => {
 
   const handleCellClick = () => {
     setIsEditMode(true);
-    onCellSelected(cell.id);
   };
 
   const onClickOutsideInputHandler = (event: MouseEvent) => {
