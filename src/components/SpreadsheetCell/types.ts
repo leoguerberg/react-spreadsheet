@@ -1,10 +1,7 @@
 import { ICell, ICellId } from '../../interfaces/Cell';
 
 export interface ISpreadsheetCellProps {
-  id: ICellId;
-  evaluatedValue: string;
-  value: string;
-  isSelected: boolean;
+  cell: ICell;
   onCellSelected: (cellId: ICellId) => void;
   onValueChange: (cellId: ICellId, newValue: string) => void;
 }

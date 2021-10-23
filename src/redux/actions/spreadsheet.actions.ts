@@ -6,8 +6,3 @@ export const onCellValueChange = (cellId: ICellId, newValue: string) => ({
   cellId,
   newValue,
 });
-
-export const onCellSelected = (cellId: ICellId) => ({
-  type: constants.SPREADSHEET_ON_CELL_SELECTED,
-  cellId,
-});

@@ -2,7 +2,8 @@ import { ICell, ICellId } from '../../interfaces/Cell';
 
 export interface ISpreadsheetProps {
   spreadsheet: ICell[][];
-  selectedCellId: ICellId;
+  rowsCount: number;
+  columnCount: number;
   onCellSelected: (cellId: ICellId) => void;
   onCellValueChange: (cellId: ICellId, newValue: string) => void;
 }

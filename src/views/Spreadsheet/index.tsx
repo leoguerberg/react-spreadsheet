@@ -1,22 +1,26 @@
 import React from 'react';
+import { generateNumbersArray } from '@ionaru/array-utils';
 
-import { getA1Notation } from '../../utils/parser';
 import SpreadsheetCell from '../../components/SpreadsheetCell';
+import { getA1Notation } from '../../utils/cells';
 import { CellWrapper, SpreadsheetWrapper } from './styles';
 import { ISpreadsheetProps } from './types';
 
 const Spreadsheet = (props: ISpreadsheetProps) => {
-  const { spreadsheet, selectedCellId, onCellSelected, onCellValueChange } = props;
+  const { spreadsheet, rowsCount, columnCount, onCellSelected, onCellValueChange } = props;
+
+  const rows = generateNumbersArray(rowsCount, 0);
+  const columns = generateNumbersArray(columnCount, 0);
 
   return (
     <SpreadsheetWrapper>
-      {spreadsheet.map((row, rowNumber) => {
+      {rows.map((rowNumber) => {
         return (
           <>
             <CellWrapper isAxisCell row={rowNumber + 2} column={1}>
               {rowNumber + 1}
             </CellWrapper>
-            {row.map((cell, columnNumber) => {
+            {columns.map((columnNumber) => {
               return (
                 <>
                   {rowNumber === 0 && (
@@ -26,10 +30,7 @@ const Spreadsheet = (props: ISpreadsheetProps) => {
                   )}
                   <CellWrapper row={rowNumber + 2} column={columnNumber + 2}>
                     <SpreadsheetCell
-                      isSelected={cell.id === selectedCellId}
-                      evaluatedValue={cell.evaluatedValue}
-                      value={cell.value}
-                      id={cell.id}
+                      cell={spreadsheet[rowNumber][columnNumber]}
                       onCellSelected={onCellSelected}
                       onValueChange={onCellValueChange}
                     />
