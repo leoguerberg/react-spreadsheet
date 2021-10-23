@@ -1,4 +1,4 @@
-import React, { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
+import React, { ChangeEvent, KeyboardEvent, useCallback, useEffect, useRef, useState } from 'react';
 
 import { evaluateValue } from '../../utils/math';
 import { Input, Label, Wrapper } from './styles';
@@ -21,14 +21,17 @@ const SpreadsheetCell = (props: ISpreadsheetCellProps) => {
     setIsEditMode(true);
     setTimeout(() => {
       inputRef.current?.focus();
-    }, 500);
+    }, 250);
   };
 
-  const onClickOutsideInputHandler = (event: MouseEvent) => {
-    if ((event.target as HTMLElement)?.dataset?.cellId !== cellId) {
-      setIsEditMode(false);
-    }
-  };
+  const handleOutsideClick = useCallback(
+    (event: MouseEvent) => {
+      if ((event.target as HTMLElement)?.dataset?.cellId !== cellId) {
+        setIsEditMode(false);
+      }
+    },
+    [cellId],
+  );
 
   const handleDefocus = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
@@ -37,9 +40,9 @@ const SpreadsheetCell = (props: ISpreadsheetCellProps) => {
   };
 
   useEffect(() => {
-    // window.addEventListener('click', onClickOutsideInputHandler);
-    // return () => window.removeEventListener('click', onClickOutsideInputHandler);
-  }, []);
+    document.addEventListener('click', handleOutsideClick);
+    return () => window.removeEventListener('click', handleOutsideClick);
+  }, [handleOutsideClick]);
 
   return (
     <Wrapper isEditMode={isEditMode} onClick={handleCellClick}>
