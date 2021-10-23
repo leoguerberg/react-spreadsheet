@@ -34,14 +34,14 @@ const SpreadsheetCell = (props: ISpreadsheetCellProps) => {
   );
 
   const handleDefocus = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' || event.key === 'Escape') {
       setIsEditMode(false);
     }
   };
 
   useEffect(() => {
     document.addEventListener('click', handleOutsideClick);
-    return () => window.removeEventListener('click', handleOutsideClick);
+    return () => document.removeEventListener('click', handleOutsideClick);
   }, [handleOutsideClick]);
 
   return (
