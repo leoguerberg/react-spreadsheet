@@ -1,5 +1,10 @@
+export interface ICellId {
+  row: number;
+  col: number;
+}
+
 export interface ICell {
-  id: string;
+  id: ICellId;
   value: string;
   evaluatedValue: string;
 }

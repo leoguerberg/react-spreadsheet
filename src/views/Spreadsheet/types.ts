@@ -1,10 +1,10 @@
-import { ICell } from '../../interfaces/Cell';
+import { ICell, ICellId } from '../../interfaces/Cell';
 
 export interface ISpreadsheetProps {
-  cells: ICell[];
-  selectedCellId: string;
-  onCellSelected: (cellId: string) => void;
-  onCellValueChange: (cellId: string, newValue: string) => void;
+  spreadsheet: ICell[][];
+  selectedCellId: ICellId;
+  onCellSelected: (cellId: ICellId) => void;
+  onCellValueChange: (cellId: ICellId, newValue: string) => void;
 }
 
 export interface ICellWrapperProps {
