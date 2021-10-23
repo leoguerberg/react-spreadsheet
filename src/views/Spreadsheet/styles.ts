@@ -13,7 +13,7 @@ export const CellWrapper = <any>styled.div.attrs((props: ICellWrapperProps) => (
   style: {
     gridRowStart: props.row,
     gridColumnStart: props.column,
-    backgroundColor: props.isAxisCell ? 'lightgray' : 'white',
+    backgroundColor: props.isAxisCell ? '#DADADA' : '#FFFFFF',
   },
 }))`
   display: flex;

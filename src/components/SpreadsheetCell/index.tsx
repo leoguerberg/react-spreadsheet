@@ -21,7 +21,7 @@ const SpreadsheetCell = (props: ISpreadsheetCellProps) => {
     setIsEditMode(true);
     setTimeout(() => {
       inputRef.current?.focus();
-    });
+    }, 500);
   };
 
   const onClickOutsideInputHandler = (event: MouseEvent) => {
@@ -37,12 +37,12 @@ const SpreadsheetCell = (props: ISpreadsheetCellProps) => {
   };
 
   useEffect(() => {
-    document.addEventListener('click', onClickOutsideInputHandler);
-    return document.addEventListener('click', onClickOutsideInputHandler);
-  });
+    // window.addEventListener('click', onClickOutsideInputHandler);
+    // return () => window.removeEventListener('click', onClickOutsideInputHandler);
+  }, []);
 
   return (
-    <Wrapper onClick={handleCellClick}>
+    <Wrapper isEditMode={isEditMode} onClick={handleCellClick}>
       {isEditMode ? (
         <Input
           ref={inputRef}
