@@ -6,5 +6,4 @@ export interface ICellId {
 export interface ICell {
   id: ICellId;
   value: string;
-  evaluatedValue: string;
 }

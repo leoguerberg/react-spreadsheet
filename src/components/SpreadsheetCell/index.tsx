@@ -1,4 +1,7 @@
 import React, { ChangeEvent, KeyboardEvent, useCallback, useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
+import cellValueSelector from '../../redux/selectors/cellValue.selector';
+import { numberToChar } from '../../utils/cells';
 
 import { evaluateValue } from '../../utils/math';
 import { Input, Label, Wrapper } from './styles';
@@ -6,15 +9,14 @@ import { ISpreadsheetCellProps } from './types';
 
 const SpreadsheetCell = (props: ISpreadsheetCellProps) => {
   const { cell, onValueChange } = props;
-  const cellId = `${cell.id.row}_${cell.id.col}`;
+  const cellId = `${numberToChar(cell.col)}${cell.row}`;
 
   const [isEditMode, setIsEditMode] = useState(false);
-  const [value, setValue] = useState('');
+  const value = useSelector(cellValueSelector(cell));
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleValueChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value);
-    onValueChange(cell.id, event.target.value);
+    onValueChange(cell, event.target.value);
   };
 
   const handleCellClick = () => {

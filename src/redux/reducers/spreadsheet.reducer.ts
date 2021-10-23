@@ -25,6 +25,7 @@ const updateCellValue = (state: ISpreadsheetReducerState, cellId: ICellId, newVa
     }
     return row;
   });
+
   return {
     ...state,
     spreadsheet: updatedSpreadsheet,

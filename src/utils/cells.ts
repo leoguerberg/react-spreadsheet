@@ -12,7 +12,6 @@ export const initializeCells = (rows = DEFAULT_ROWS_COUNT, columns = DEFAULT_COL
           col: j,
         },
         value: '',
-        evaluatedValue: '',
       });
     }
     array.push(row);
@@ -20,10 +19,37 @@ export const initializeCells = (rows = DEFAULT_ROWS_COUNT, columns = DEFAULT_COL
   return array;
 };
 
-export const getA1Notation = (_num: number) => {
-  let str = '';
-  const multiples = Math.ceil(_num / 26);
-  let _charAtCode = _num - (multiples - 1) * 26;
-  for (let i = 0; i < multiples; i++) str += String.fromCharCode(_charAtCode + 64);
-  return str;
+export const numberToChar = (num: number): string => {
+  const division = Math.floor(num / 26);
+  const reminder = Math.floor(num % 26);
+  const char = String.fromCharCode(reminder + 97).toUpperCase();
+  return division - 1 >= 0 ? numberToChar(division - 1) + char : char;
+};
+
+export const charToNumber = (letters: string) =>
+  letters
+    // Get each letter on its own
+    .split('')
+    // Smaller first and then bigger
+    .reverse()
+    // Convert them to base 26 numbers
+    .map((letter, index) =>
+      index === 0
+        ? letter.toLowerCase().charCodeAt(0) - 97
+        : // The addition of 1 here is to oppose what we did for numberToLetter
+          letter.toLowerCase().charCodeAt(0) - 97 + 1,
+    )
+    // Convert base 26 to base 10
+    .map((base26Number, position) => base26Number * 26 ** position)
+    // Sum
+    .reduce((sum: number, number: number) => sum + number, 0);
+
+export const cellIdtoMatrixIndices = (cellId: string) => {
+  const columnLetters = cellId.match(/[A-Z]+/)![0];
+  const columnNumber = charToNumber(columnLetters);
+  const rowNumber = parseInt(cellId.match(/[0-9]+/)![0]) - 1;
+  return {
+    col: columnNumber,
+    row: rowNumber,
+  };
 };

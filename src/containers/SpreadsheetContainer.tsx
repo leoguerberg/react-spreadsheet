@@ -5,7 +5,6 @@ import * as spreadsheetActions from '../redux/actions/spreadsheet.actions';
 
 import { ICellId } from '../interfaces/Cell';
 import Spreadsheet from '../views/Spreadsheet';
-import { initializeCells } from '../utils/cells';
 import { DEFAULT_COLUMNS_COUNT, DEFAULT_ROWS_COUNT } from '../utils/constants';
 
 const SpreadsheetContainer = () => {
@@ -19,7 +18,6 @@ const SpreadsheetContainer = () => {
     <Spreadsheet
       rowsCount={DEFAULT_ROWS_COUNT}
       columnCount={DEFAULT_COLUMNS_COUNT}
-      spreadsheet={initializeCells()}
       onCellValueChange={handleCellValueChange}
     />
   );

@@ -2,12 +2,12 @@ import React, { Fragment } from 'react';
 import { generateNumbersArray } from '@ionaru/array-utils';
 
 import SpreadsheetCell from '../../components/SpreadsheetCell';
-import { getA1Notation } from '../../utils/cells';
+import { numberToChar } from '../../utils/cells';
 import { CellWrapper, SpreadsheetWrapper } from './styles';
 import { ISpreadsheetProps } from './types';
 
 const Spreadsheet = (props: ISpreadsheetProps) => {
-  const { spreadsheet, rowsCount, columnCount, onCellValueChange } = props;
+  const { rowsCount, columnCount, onCellValueChange } = props;
 
   const rows = generateNumbersArray(rowsCount, 0);
   const columns = generateNumbersArray(columnCount, 0);
@@ -25,12 +25,12 @@ const Spreadsheet = (props: ISpreadsheetProps) => {
                 <Fragment key={columnNumber}>
                   {rowNumber === 0 && (
                     <CellWrapper isAxisCell row={1} column={columnNumber + 2}>
-                      {getA1Notation(columnNumber + 1)}
+                      {numberToChar(columnNumber + 1)}
                     </CellWrapper>
                   )}
                   <CellWrapper row={rowNumber + 2} column={columnNumber + 2}>
                     <SpreadsheetCell
-                      cell={spreadsheet[rowNumber][columnNumber]}
+                      cell={{ row: rowNumber + 1, col: columnNumber + 1 }}
                       onValueChange={onCellValueChange}
                     />
                   </CellWrapper>
