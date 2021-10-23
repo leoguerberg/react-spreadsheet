@@ -27,7 +27,9 @@ const Spreadsheet = (props: ISpreadsheetProps) => {
                   <CellWrapper row={rowNumber + 2} column={columnNumber + 2}>
                     <SpreadsheetCell
                       isSelected={cell.id === selectedCellId}
-                      cell={cell}
+                      evaluatedValue={cell.evaluatedValue}
+                      value={cell.value}
+                      id={cell.id}
                       onCellSelected={onCellSelected}
                       onValueChange={onCellValueChange}
                     />

@@ -3,9 +3,9 @@ import * as spreadsheetConstants from '../constants/spreadsheet.constants';
 
 const createArray = () => {
   let array: ICell[][] = [];
-  for (let i = 1; i < 24; i++) {
+  for (let i = 1; i < 10; i++) {
     let row = [];
-    for (let j = 1; j < 24; j++) {
+    for (let j = 1; j < 10; j++) {
       row.push({
         id: {
           row: i,
