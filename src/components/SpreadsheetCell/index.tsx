@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
 
 import { evaluateValue } from '../../utils/math';
 import { Input, Label, Wrapper } from './styles';
@@ -10,6 +10,7 @@ const SpreadsheetCell = (props: ISpreadsheetCellProps) => {
 
   const [isEditMode, setIsEditMode] = useState(false);
   const [value, setValue] = useState('');
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleValueChange = (event: ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
@@ -18,6 +19,9 @@ const SpreadsheetCell = (props: ISpreadsheetCellProps) => {
 
   const handleCellClick = () => {
     setIsEditMode(true);
+    setTimeout(() => {
+      inputRef.current?.focus();
+    });
   };
 
   const onClickOutsideInputHandler = (event: MouseEvent) => {
@@ -25,6 +29,12 @@ const SpreadsheetCell = (props: ISpreadsheetCellProps) => {
       setIsEditMode(false);
     }
   };
+
+  const handleDefocus = (event: KeyboardEvent<HTMLInputElement>) => {
+    if(event.key === 'Enter') {
+      setIsEditMode(false)
+    }
+  }
 
   useEffect(() => {
     document.addEventListener('click', onClickOutsideInputHandler);
@@ -34,7 +44,7 @@ const SpreadsheetCell = (props: ISpreadsheetCellProps) => {
   return (
     <Wrapper onClick={handleCellClick}>
       {isEditMode ? (
-        <Input type="text" value={value} onChange={handleValueChange} data-cell-id={cellId} />
+        <Input ref={inputRef} type="text" value={value} onChange={handleValueChange} onKeyDown={handleDefocus} data-cell-id={cellId} />
       ) : (
         <Label data-cell-id={cellId}>{evaluateValue(value)}</Label>
       )}
