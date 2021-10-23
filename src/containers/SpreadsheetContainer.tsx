@@ -1,67 +1,32 @@
-import React, { useState } from 'react';
-import { evaluate } from 'mathjs';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { ICell, ICellId } from '../interfaces/Cell';
+import spreadsheetSelector from '../redux/selectors/spreadsheet.selector';
+import selectedCellSelector from '../redux/selectors/selectedCell.selector';
+import * as spreadsheetActions from '../redux/actions/spreadsheet.actions';
+
+import { ICellId } from '../interfaces/Cell';
 import Spreadsheet from '../views/Spreadsheet';
 
-const createArray = () => {
-  let array: ICell[][] = [];
-  for (let i = 1; i < 24; i++) {
-    let row = [];
-    for (let j = 1; j < 24; j++) {
-      row.push({
-        id: {
-          row: i,
-          col: j,
-        },
-        value: '',
-        evaluatedValue: '',
-      });
-    }
-    array.push(row);
-  }
-  return array;
-};
-
 const SpreadsheetContainer = () => {
-  // todo: move state to redux
-  const [spreadsheet, setSpreadsheet] = useState<ICell[][]>(createArray());
-  const [selectedCellId, setSelectedCellId] = useState({
-    row: 0,
-    col: 0,
-  });
+  const dispatch = useDispatch();
+
+  const spreadsheet = useSelector(spreadsheetSelector());
+  const selectedCell = useSelector(selectedCellSelector());
 
   const handleCellValueChange = (cellId: ICellId, newValue: string) => {
-    const updatedSpreadsheet = spreadsheet.map((row, rowNumber) => {
-      if (rowNumber + 1 === cellId.row){
-        return row.map((cell, columnNumber) => {
-          if (columnNumber + 1 === cellId.col){
-          let newEvaluatedValue = newValue;
-          if(newValue.startsWith('=')){
-          try{
-            newEvaluatedValue = evaluate(newValue.slice(1))
-          } catch{
-            newEvaluatedValue = newValue
-          }}
-            return {
-              ...cell,
-              value: newValue,
-              evaluatedValue: newEvaluatedValue,
-            };
-          }
-          return cell;
-        });
-      }
-      return row;
-    });
-    setSpreadsheet(updatedSpreadsheet);
+    dispatch(spreadsheetActions.onCellValueChange(cellId, newValue));
+  };
+
+  const handleCellSelected = (cellId: ICellId) => {
+    dispatch(spreadsheetActions.onCellSelected(cellId));
   };
 
   return (
     <Spreadsheet
       spreadsheet={spreadsheet}
-      selectedCellId={selectedCellId}
-      onCellSelected={setSelectedCellId}
+      selectedCellId={selectedCell}
+      onCellSelected={handleCellSelected}
       onCellValueChange={handleCellValueChange}
     />
   );
