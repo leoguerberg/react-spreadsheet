@@ -10,21 +10,21 @@ const Spreadsheet = (props: ISpreadsheetProps) => {
 
   return (
     <SpreadsheetWrapper>
-      {spreadsheet.map((row, i) => {
+      {spreadsheet.map((row, rowNumber) => {
         return (
           <>
-            <CellWrapper row={i + 2} column={1}>
-              {i + 1}
+            <CellWrapper row={rowNumber + 2} column={1}>
+              {rowNumber + 1}
             </CellWrapper>
-            {row.map((cell, j) => {
+            {row.map((cell, columnNumber) => {
               return (
                 <>
-                  {i === 0 && (
-                    <CellWrapper row={1} column={j + 2}>
-                      {getA1Notation(j + 1)}
+                  {rowNumber === 0 && (
+                    <CellWrapper row={1} column={columnNumber + 2}>
+                      {getA1Notation(columnNumber + 1)}
                     </CellWrapper>
                   )}
-                  <CellWrapper row={i + 2} column={j + 2}>
+                  <CellWrapper row={rowNumber + 2} column={columnNumber + 2}>
                     <SpreadsheetCell
                       isSelected={cell.id === selectedCellId}
                       cell={cell}

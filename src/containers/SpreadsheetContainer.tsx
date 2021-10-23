@@ -1,15 +1,14 @@
-import { evaluate } from 'mathjs';
 import React, { useState } from 'react';
+import { evaluate } from 'mathjs';
 
-import { getA1Notation } from '../utils/parser';
 import { ICell, ICellId } from '../interfaces/Cell';
 import Spreadsheet from '../views/Spreadsheet';
 
 const createArray = () => {
   let array: ICell[][] = [];
-  for (let i = 1; i < 10; i++) {
+  for (let i = 1; i < 24; i++) {
     let row = [];
-    for (let j = 1; j < 10; j++) {
+    for (let j = 1; j < 24; j++) {
       row.push({
         id: {
           row: i,
@@ -34,17 +33,16 @@ const SpreadsheetContainer = () => {
 
   const handleCellValueChange = (cellId: ICellId, newValue: string) => {
     const updatedSpreadsheet = spreadsheet.map((row, rowNumber) => {
-      if (rowNumber + 1 === cellId.row) {
+      if (rowNumber + 1 === cellId.row){
         return row.map((cell, columnNumber) => {
-          if (columnNumber + 1 === cellId.col) {
-            let newEvaluatedValue = newValue;
-            if (newValue.startsWith('=')) {
-              try {
-                newEvaluatedValue = evaluate(newValue.slice(1));
-              } catch {
-                newEvaluatedValue = newValue;
-              }
-            }
+          if (columnNumber + 1 === cellId.col){
+          let newEvaluatedValue = newValue;
+          if(newValue.startsWith('=')){
+          try{
+            newEvaluatedValue = evaluate(newValue.slice(1))
+          } catch{
+            newEvaluatedValue = newValue
+          }}
             return {
               ...cell,
               value: newValue,

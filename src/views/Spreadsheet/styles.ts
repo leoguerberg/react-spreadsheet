@@ -4,8 +4,8 @@ import { ICellWrapperProps } from './types';
 
 export const SpreadsheetWrapper = styled.div`
   display: grid;
-  grid-template-columns: 1fr repeat(10, 1fr);
-  grid-template-rows: 30px repeat(10, 30px);
+  grid-template-columns: 1fr repeat(24, 1fr);
+  grid-template-rows: 30px repeat(24, 30px);
 `;
 
 export const CellWrapper = styled.div<ICellWrapperProps>`
