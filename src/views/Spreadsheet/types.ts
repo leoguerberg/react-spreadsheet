@@ -8,6 +8,11 @@ export interface ISpreadsheetProps {
   onCellValueChange: (cellId: ICellId, newValue: string) => void;
 }
 
+export interface ISpreadsheetWrapperProps{
+  rowsCount: number;
+  columnCount: number;
+}
+
 export interface ICellWrapperProps {
   row: number;
   column: number;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { generateNumbersArray } from '@ionaru/array-utils';
 
 import SpreadsheetCell from '../../components/SpreadsheetCell';
@@ -13,16 +13,16 @@ const Spreadsheet = (props: ISpreadsheetProps) => {
   const columns = generateNumbersArray(columnCount, 0);
 
   return (
-    <SpreadsheetWrapper>
+    <SpreadsheetWrapper rowsCount={rowsCount} columnCount={columnCount}>
       {rows.map((rowNumber) => {
         return (
-          <>
+          <Fragment key={rowNumber}>
             <CellWrapper isAxisCell row={rowNumber + 2} column={1}>
               {rowNumber + 1}
             </CellWrapper>
             {columns.map((columnNumber) => {
               return (
-                <>
+                <Fragment key={columnNumber}>
                   {rowNumber === 0 && (
                     <CellWrapper isAxisCell row={1} column={columnNumber + 2}>
                       {getA1Notation(columnNumber + 1)}
@@ -35,10 +35,10 @@ const Spreadsheet = (props: ISpreadsheetProps) => {
                       onValueChange={onCellValueChange}
                     />
                   </CellWrapper>
-                </>
+                </Fragment>
               );
             })}
-          </>
+          </Fragment>
         );
       })}
     </SpreadsheetWrapper>

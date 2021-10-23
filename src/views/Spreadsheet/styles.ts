@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-import { ICellWrapperProps } from './types';
+import { ICellWrapperProps, ISpreadsheetWrapperProps } from './types';
 
-export const SpreadsheetWrapper = styled.div`
+export const SpreadsheetWrapper = styled.div<ISpreadsheetWrapperProps>`
   display: grid;
-  grid-template-columns: 30px repeat(50, 150px);
-  grid-template-rows: 30px repeat(50, 30px);
+  grid-template-columns: 30px repeat(${props => props.columnCount}, 150px);
+  grid-template-rows: 30px repeat(${props => props.rowsCount}, 30px);
   overflow: auto;
 `;
 
