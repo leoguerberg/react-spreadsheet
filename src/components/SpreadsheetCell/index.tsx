@@ -31,10 +31,10 @@ const SpreadsheetCell = (props: ISpreadsheetCellProps) => {
   };
 
   const handleDefocus = (event: KeyboardEvent<HTMLInputElement>) => {
-    if(event.key === 'Enter') {
-      setIsEditMode(false)
+    if (event.key === 'Enter') {
+      setIsEditMode(false);
     }
-  }
+  };
 
   useEffect(() => {
     document.addEventListener('click', onClickOutsideInputHandler);
@@ -44,7 +44,14 @@ const SpreadsheetCell = (props: ISpreadsheetCellProps) => {
   return (
     <Wrapper onClick={handleCellClick}>
       {isEditMode ? (
-        <Input ref={inputRef} type="text" value={value} onChange={handleValueChange} onKeyDown={handleDefocus} data-cell-id={cellId} />
+        <Input
+          ref={inputRef}
+          type="text"
+          value={value}
+          onChange={handleValueChange}
+          onKeyDown={handleDefocus}
+          data-cell-id={cellId}
+        />
       ) : (
         <Label data-cell-id={cellId}>{evaluateValue(value)}</Label>
       )}
