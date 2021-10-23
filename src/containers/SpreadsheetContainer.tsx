@@ -34,16 +34,26 @@ const SpreadsheetContainer = () => {
 
   const handleCellValueChange = (cellId: ICellId, newValue: string) => {
     const updatedSpreadsheet = spreadsheet.map((row, rowNumber) => {
-      if (rowNumber + 1 === cellId.row)
+      if (rowNumber + 1 === cellId.row) {
         return row.map((cell, columnNumber) => {
-          if (columnNumber + 1 === cellId.col)
+          if (columnNumber + 1 === cellId.col) {
+            let newEvaluatedValue = newValue;
+            if (newValue.startsWith('=')) {
+              try {
+                newEvaluatedValue = evaluate(newValue.slice(1));
+              } catch {
+                newEvaluatedValue = newValue;
+              }
+            }
             return {
               ...cell,
               value: newValue,
-              evaluatedValue: newValue,
+              evaluatedValue: newEvaluatedValue,
             };
+          }
           return cell;
         });
+      }
       return row;
     });
     setSpreadsheet(updatedSpreadsheet);

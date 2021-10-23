@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { cellA1ToIndex, getA1Notation } from '../../utils/parser';
+import { getA1Notation } from '../../utils/parser';
 import SpreadsheetCell from '../../components/SpreadsheetCell';
 import { CellWrapper, SpreadsheetWrapper } from './styles';
 import { ISpreadsheetProps } from './types';
