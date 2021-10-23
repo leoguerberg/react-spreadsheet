@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { ICellWrapperProps } from './types';
 
@@ -15,4 +15,7 @@ export const CellWrapper = styled.div<ICellWrapperProps>`
   align-items: center;
   justify-content: center;
   border: 1px solid #777;
+  ${props => props.isAxisCell && css`
+    background-color: lightgray;
+  `}
 `;

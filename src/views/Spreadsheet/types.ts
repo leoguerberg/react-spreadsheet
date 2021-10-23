@@ -10,4 +10,5 @@ export interface ISpreadsheetProps {
 export interface ICellWrapperProps {
   row: number;
   column: number;
+  isAxisCell?: boolean;
 }

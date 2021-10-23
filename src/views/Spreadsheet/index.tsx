@@ -13,20 +13,20 @@ const Spreadsheet = (props: ISpreadsheetProps) => {
       {spreadsheet.map((row, rowNumber) => {
         return (
           <>
-            <CellWrapper row={rowNumber + 2} column={1}>
+            <CellWrapper isAxisCell row={rowNumber + 2} column={1}>
               {rowNumber + 1}
             </CellWrapper>
             {row.map((cell, columnNumber) => {
               return (
                 <>
                   {rowNumber === 0 && (
-                    <CellWrapper row={1} column={columnNumber + 2}>
+                    <CellWrapper isAxisCell row={1} column={columnNumber + 2}>
                       {getA1Notation(columnNumber + 1)}
                     </CellWrapper>
                   )}
                   <CellWrapper row={rowNumber + 2} column={columnNumber + 2}>
                     <SpreadsheetCell
-                      isSelected={cell.id === selectedCellId}
+                      isSelected={true}
                       cell={cell}
                       onCellSelected={onCellSelected}
                       onValueChange={onCellValueChange}
@@ -43,24 +43,3 @@ const Spreadsheet = (props: ISpreadsheetProps) => {
 };
 
 export default Spreadsheet;
-
-// const { row, col }: any = cellA1ToIndex(cell.id, 1);
-//   return (
-//     <>
-//       <CellWrapper row={row + 1} column={1}>
-//         {row}
-//       </CellWrapper>
-//       <CellWrapper row={1} column={col + 1}>
-//         {getA1Notation(col)}
-//       </CellWrapper>
-//       <CellWrapper row={row + 1} column={col + 1}>
-//         <SpreadsheetCell
-//           isSelected={cell.id === selectedCellId}
-//           cell={cell}
-//           onCellSelected={onCellSelected}
-//           onValueChange={onCellValueChange}
-//         />
-//       </CellWrapper>
-//     </>
-//   );
-// })}
