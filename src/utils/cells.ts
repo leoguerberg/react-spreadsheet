@@ -48,3 +48,9 @@ export const cellIdtoMatrixIndices = (cellId: string) => {
     row: rowNumber,
   };
 };
+
+export const hasRecursiveDependency = (expressionCells: string[], cellsToValidate: string[]) => {
+  return expressionCells.some((cell) => {
+    return cellsToValidate.includes(cell);
+  });
+};

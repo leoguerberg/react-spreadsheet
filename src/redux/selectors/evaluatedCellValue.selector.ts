@@ -2,7 +2,7 @@ import { evaluate } from 'mathjs';
 import { createSelector } from 'reselect';
 
 import { ICell, ICellId } from 'interfaces/Cell';
-import { cellIdtoMatrixIndices } from 'utils/cells';
+import { cellIdtoMatrixIndices, hasRecursiveDependency } from 'utils/cells';
 
 import cellValueSelector from './cellValue.selector';
 
@@ -14,11 +14,7 @@ export const getEquationExpression = (
   const cellsToEvaluate: string[] = [...Array.from(expression.matchAll(/[A-Z]+[0-9]+/gi))].map(
     (output: any) => output[0],
   );
-  if (
-    cellsToEvaluate.some((cell) => {
-      return cellsToOmit.includes(cell);
-    })
-  ) {
+  if (hasRecursiveDependency(cellsToEvaluate, cellsToOmit)) {
     return '!ERROR';
   }
   const cellValues = cellsToEvaluate.map((cellId: string) => {
