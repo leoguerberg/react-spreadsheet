@@ -1,6 +1,8 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { CellModes, ICell, ICellId } from '../../interfaces/Cell';
-import { initializeCells } from '../../utils/cells';
+
+import { CellModes, ICell, ICellId } from 'interfaces/Cell';
+import { initializeCells } from 'utils/cells';
+
 import { ISpreadsheetAction } from '../actions/spreadsheet.actions';
 import * as spreadsheetConstants from '../constants/spreadsheet.constants';
 

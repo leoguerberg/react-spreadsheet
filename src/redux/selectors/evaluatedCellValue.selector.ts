@@ -1,8 +1,9 @@
 import { evaluate } from 'mathjs';
 import { createSelector } from 'reselect';
 
-import { ICell, ICellId } from '../../interfaces/Cell';
-import { cellIdtoMatrixIndices } from '../../utils/cells';
+import { ICell, ICellId } from 'interfaces/Cell';
+import { cellIdtoMatrixIndices } from 'utils/cells';
+
 import cellValueSelector from './cellValue.selector';
 
 export const getEquationExpression = (

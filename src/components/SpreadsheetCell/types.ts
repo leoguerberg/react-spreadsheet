@@ -1,5 +1,6 @@
 import { boolean } from 'mathjs';
-import { CellModes, ICellId } from '../../interfaces/Cell';
+
+import { CellModes, ICellId } from 'interfaces/Cell';
 
 export interface ISpreadsheetCellProps {
   cell: ICellId;

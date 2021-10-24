@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider as ReduxProvider } from 'react-redux';
 
+import Spreadsheet from 'containers/SpreadsheetContainer';
+
 import reportWebVitals from './reportWebVitals';
 import store from './redux/store';
 import './index.css';
-
-import Spreadsheet from './containers/SpreadsheetContainer';
 
 ReactDOM.render(
   <ReduxProvider store={store}>

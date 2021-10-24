@@ -1,11 +1,10 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import * as spreadsheetActions from '../redux/actions/spreadsheet.actions';
-
-import { CellModes, ICellId } from '../interfaces/Cell';
-import Spreadsheet from '../views/Spreadsheet';
-import { DEFAULT_COLUMNS_COUNT, DEFAULT_ROWS_COUNT } from '../utils/constants';
+import * as spreadsheetActions from 'redux/actions/spreadsheet.actions';
+import { CellModes, ICellId } from 'interfaces/Cell';
+import { DEFAULT_COLUMNS_COUNT, DEFAULT_ROWS_COUNT } from 'utils/constants';
+import Spreadsheet from 'views/Spreadsheet';
 
 const SpreadsheetContainer = () => {
   const dispatch = useDispatch();

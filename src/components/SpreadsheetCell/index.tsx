@@ -1,10 +1,11 @@
 import React, { ChangeEvent, KeyboardEvent, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
-import { CellModes } from '../../interfaces/Cell';
-import cellModeSelector from '../../redux/selectors/cellMode.selector';
-import cellValueSelector from '../../redux/selectors/cellValue.selector';
-import evaluatedCellValueSelector from '../../redux/selectors/evaluatedCellValue.selector';
-import { numberToChar } from '../../utils/cells';
+
+import { CellModes } from 'interfaces/Cell';
+import cellModeSelector from 'redux/selectors/cellMode.selector';
+import cellValueSelector from 'redux/selectors/cellValue.selector';
+import evaluatedCellValueSelector from 'redux/selectors/evaluatedCellValue.selector';
+import { numberToChar } from 'utils/cells';
 
 import { Input, Label, Wrapper } from './styles';
 import { ISpreadsheetCellProps } from './types';

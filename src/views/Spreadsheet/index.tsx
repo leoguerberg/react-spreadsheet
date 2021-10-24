@@ -1,11 +1,12 @@
 import React, { Fragment } from 'react';
 import { generateNumbersArray } from '@ionaru/array-utils';
 
-import SpreadsheetCell from '../../components/SpreadsheetCell';
-import { numberToChar } from '../../utils/cells';
+import SpreadsheetCell from 'components/SpreadsheetCell';
+import { numberToChar } from 'utils/cells';
+import { CellModes, ICellId } from 'interfaces/Cell';
+
 import { CellWrapper, SpreadsheetWrapper } from './styles';
 import { ISpreadsheetProps } from './types';
-import { CellModes, ICellId } from '../../interfaces/Cell';
 
 const Spreadsheet = (props: ISpreadsheetProps) => {
   const { rowsCount, columnCount, onCellModeChange, onCellValueChange } = props;

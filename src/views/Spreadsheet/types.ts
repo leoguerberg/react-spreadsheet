@@ -1,4 +1,4 @@
-import { CellModes, ICell, ICellId } from '../../interfaces/Cell';
+import { CellModes, ICell, ICellId } from 'interfaces/Cell';
 
 export interface ISpreadsheetProps {
   rowsCount: number;

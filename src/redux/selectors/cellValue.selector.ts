@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 
-import { ICellId } from '../../interfaces/Cell';
+import { ICellId } from 'interfaces/Cell';
+
 import { IReduxState } from '../store';
 
 const getSpreadsheet = (state: IReduxState) => {
