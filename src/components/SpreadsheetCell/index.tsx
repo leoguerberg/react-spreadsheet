@@ -1,9 +1,9 @@
 import React, { ChangeEvent, KeyboardEvent, useCallback, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import cellValueSelector from '../../redux/selectors/cellValue.selector';
+import evaluatedCellValueSelector from '../../redux/selectors/evaluatedCellValue.selector';
 import { numberToChar } from '../../utils/cells';
 
-import { evaluateValue } from '../../utils/math';
 import { Input, Label, Wrapper } from './styles';
 import { ISpreadsheetCellProps } from './types';
 
@@ -11,9 +11,11 @@ const SpreadsheetCell = (props: ISpreadsheetCellProps) => {
   const { cell, onValueChange } = props;
   const cellId = `${numberToChar(cell.col)}${cell.row}`;
 
+  console.log('Rendering:', cellId);
+  const inputRef = useRef<HTMLInputElement>(null);
   const [isEditMode, setIsEditMode] = useState(false);
   const value = useSelector(cellValueSelector(cell));
-  const inputRef = useRef<HTMLInputElement>(null);
+  const evaluatedValue = useSelector(evaluatedCellValueSelector(cell));
 
   const handleValueChange = (event: ChangeEvent<HTMLInputElement>) => {
     onValueChange(cell, event.target.value);
@@ -58,7 +60,7 @@ const SpreadsheetCell = (props: ISpreadsheetCellProps) => {
           data-cell-id={cellId}
         />
       ) : (
-        <Label data-cell-id={cellId}>{evaluateValue(value)}</Label>
+        <Label data-cell-id={cellId}>{evaluatedValue}</Label>
       )}
     </Wrapper>
   );
