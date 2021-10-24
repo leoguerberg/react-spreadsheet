@@ -1,4 +1,4 @@
-import { ICell } from '../interfaces/Cell';
+import { CellModes, ICell } from '../interfaces/Cell';
 import { DEFAULT_COLUMNS_COUNT, DEFAULT_ROWS_COUNT } from './constants';
 
 export const initializeCells = (rows = DEFAULT_ROWS_COUNT, columns = DEFAULT_COLUMNS_COUNT) => {
@@ -12,6 +12,7 @@ export const initializeCells = (rows = DEFAULT_ROWS_COUNT, columns = DEFAULT_COL
           col: j,
         },
         value: '',
+        mode: CellModes.LABEL,
       });
     }
     array.push(row);

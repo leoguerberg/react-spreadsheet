@@ -1,7 +1,9 @@
-import { ICell, ICellId } from '../../interfaces/Cell';
+import { CellModes, ICell, ICellId } from '../../interfaces/Cell';
 
 export interface ISpreadsheetCellProps {
   cell: ICellId;
+  onModeChange: (cellId: ICellId, newMode: CellModes) => void;
+  onKeyPressed: (cellId: ICellId, key: string) => void;
   onValueChange: (cellId: ICellId, newValue: string) => void;
 }
 

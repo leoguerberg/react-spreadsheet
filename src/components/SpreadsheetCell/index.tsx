@@ -1,5 +1,7 @@
-import React, { ChangeEvent, KeyboardEvent, useCallback, useEffect, useRef, useState } from 'react';
+import React, { ChangeEvent, KeyboardEvent, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
+import { CellModes } from '../../interfaces/Cell';
+import cellModeSelector from '../../redux/selectors/cellMode.selector';
 import cellValueSelector from '../../redux/selectors/cellValue.selector';
 import evaluatedCellValueSelector from '../../redux/selectors/evaluatedCellValue.selector';
 import { numberToChar } from '../../utils/cells';
@@ -8,13 +10,12 @@ import { Input, Label, Wrapper } from './styles';
 import { ISpreadsheetCellProps } from './types';
 
 const SpreadsheetCell = (props: ISpreadsheetCellProps) => {
-  const { cell, onValueChange } = props;
+  const { cell, onKeyPressed, onModeChange, onValueChange } = props;
   const cellId = `${numberToChar(cell.col)}${cell.row}`;
-
-  console.log('Rendering:', cellId);
   const inputRef = useRef<HTMLInputElement>(null);
-  const [isEditMode, setIsEditMode] = useState(false);
+
   const value = useSelector(cellValueSelector(cell));
+  const mode = useSelector(cellModeSelector(cell));
   const evaluatedValue = useSelector(evaluatedCellValueSelector(cell));
 
   const handleValueChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -22,41 +23,28 @@ const SpreadsheetCell = (props: ISpreadsheetCellProps) => {
   };
 
   const handleCellClick = () => {
-    setIsEditMode(true);
-    setTimeout(() => {
-      inputRef.current?.focus();
-    }, 250);
+    onModeChange(cell, CellModes.EDIT);
   };
 
-  const handleOutsideClick = useCallback(
-    (event: MouseEvent) => {
-      if ((event.target as HTMLElement)?.dataset?.cellId !== cellId) {
-        setIsEditMode(false);
-      }
-    },
-    [cellId],
-  );
-
-  const handleDefocus = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter' || event.key === 'Escape') {
-      setIsEditMode(false);
-    }
+  const handleKeyPressed = (event: KeyboardEvent<HTMLInputElement>) => {
+    onKeyPressed(cell, event.key);
   };
 
   useEffect(() => {
-    document.addEventListener('click', handleOutsideClick);
-    return () => document.removeEventListener('click', handleOutsideClick);
-  }, [handleOutsideClick]);
+    if (mode === CellModes.EDIT) {
+      inputRef.current?.focus();
+    }
+  }, [mode]);
 
   return (
-    <Wrapper isEditMode={isEditMode} onClick={handleCellClick}>
-      {isEditMode ? (
+    <Wrapper isEditMode={mode === CellModes.EDIT} onClick={handleCellClick}>
+      {mode === CellModes.EDIT ? (
         <Input
           ref={inputRef}
           type="text"
           value={value}
           onChange={handleValueChange}
-          onKeyDown={handleDefocus}
+          onKeyDown={handleKeyPressed}
           data-cell-id={cellId}
         />
       ) : (

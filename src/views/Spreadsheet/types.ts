@@ -1,8 +1,9 @@
-import { ICell, ICellId } from '../../interfaces/Cell';
+import { CellModes, ICell, ICellId } from '../../interfaces/Cell';
 
 export interface ISpreadsheetProps {
   rowsCount: number;
   columnCount: number;
+  onCellModeChange: (cellId: ICellId, newMode: CellModes) => void;
   onCellValueChange: (cellId: ICellId, newValue: string) => void;
 }
 
