@@ -1,19 +1,19 @@
 import { evaluate } from 'mathjs';
 import { createSelector } from 'reselect';
 
-import { ICellId } from '../../interfaces/Cell';
+import { ICell, ICellId } from '../../interfaces/Cell';
 import { cellIdtoMatrixIndices } from '../../utils/cells';
-import { IReduxState } from '../store';
 import cellValueSelector from './cellValue.selector';
 
-export const getEquationExpressionFromState = (state: IReduxState, expression: string) => {
+export const getEquationExpressionFromState = (spreadsheet: ICell[][], expression: string) => {
+  // Todo: add !ERROR
   const cellValues = [...Array.from(expression.matchAll(/[A-Z]+[0-9]+/gi))]
-    .map((regrexOutput: any) => regrexOutput[0])
+    .map((output: any) => output[0])
     .map((cellId: string) => {
-      const { row, col } = cellIdtoMatrixIndices(cellId);
       let value = '';
+      const { row, col } = cellIdtoMatrixIndices(cellId);
       try {
-        value = state.spreadsheet.spreadsheet[row][col - 1].value;
+        value = spreadsheet[row][col - 1].value;
       } catch {}
       return {
         cellId,
@@ -24,18 +24,15 @@ export const getEquationExpressionFromState = (state: IReduxState, expression: s
     (finalExpression, cellValue) => finalExpression.replaceAll(cellValue.cellId, cellValue.value.toString()),
     expression,
   );
-
-  // Evaluated expression needs to be added between brackets to avoid issues caused
-  // by Mathematical operations priority
   return `(${evaluatedExpression})`;
 };
 
 const evaluatedCellValueSelector = (cell: ICellId) =>
-  createSelector([(state) => state, cellValueSelector(cell)], (state, value) => {
+  createSelector([(state) => state.spreadsheet.spreadsheet, cellValueSelector(cell)], (spreadsheet, value) => {
     let evaluatedValue = value;
     if (value.startsWith('=')) {
       try {
-        const expression = getEquationExpressionFromState(state, value.slice(1));
+        const expression = getEquationExpressionFromState(spreadsheet, value.slice(1));
         evaluatedValue = evaluate(expression);
       } catch {
         evaluatedValue = value;

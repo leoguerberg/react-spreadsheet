@@ -55,6 +55,7 @@ const disableAllCells = (state: ISpreadsheetReducerState) => {
   };
 };
 
+// Todo: type action
 const spreadsheetReducer = (state = DEFAULT_STATE, action: any) => {
   switch (action.type) {
     case spreadsheetConstants.SPREADSHEET_ON_CELL_VALUE_CHANGE:
