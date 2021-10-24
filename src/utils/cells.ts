@@ -12,7 +12,7 @@ export const initializeCells = (rows = DEFAULT_ROWS_COUNT, columns = DEFAULT_COL
           col: j,
         },
         value: '',
-        mode: CellModes.LABEL,
+        mode: i === 1 && j === 1 ? CellModes.EDIT : CellModes.LABEL,
       });
     }
     array.push(row);
@@ -27,19 +27,16 @@ export const numberToChar = (num: number): string => {
   return division - 1 >= 0 ? numberToChar(division - 1) + char : char;
 };
 
-// Todo: see why the first column is B
-export const charToNumber = (letters: string) =>
-  letters
+export const charToNumber = (letters: string) => {
+  return letters
     .split('')
     .reverse()
     .map((letter, index) =>
-      index === 0
-        ? letter.toLowerCase().charCodeAt(0) - 97
-        : // The addition of 1 here is to oppose what we did for numberToLetter
-          letter.toLowerCase().charCodeAt(0) - 97 + 1,
+      index === 0 ? letter.toLowerCase().charCodeAt(0) - 96 : letter.toLowerCase().charCodeAt(0) - 96 + 1,
     )
     .map((base26Number, position) => base26Number * 26 ** position)
     .reduce((sum: number, number: number) => sum + number, 0);
+};
 
 export const cellIdtoMatrixIndices = (cellId: string) => {
   const columnLetters = cellId.match(/[A-Z]+/)![0];

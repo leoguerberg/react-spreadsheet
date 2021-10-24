@@ -56,7 +56,7 @@ const Spreadsheet = (props: ISpreadsheetProps) => {
                 <Fragment key={columnNumber}>
                   {rowNumber === 0 && (
                     <CellWrapper isAxisCell row={1} column={columnNumber + 2}>
-                      {numberToChar(columnNumber + 1)}
+                      {numberToChar(columnNumber)}
                     </CellWrapper>
                   )}
                   <CellWrapper row={rowNumber + 2} column={columnNumber + 2}>
