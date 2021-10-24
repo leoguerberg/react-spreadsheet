@@ -1,5 +1,7 @@
+import { PayloadAction } from '@reduxjs/toolkit';
 import { CellModes, ICell, ICellId } from '../../interfaces/Cell';
 import { initializeCells } from '../../utils/cells';
+import { ISpreadsheetAction } from '../actions/spreadsheet.actions';
 import * as spreadsheetConstants from '../constants/spreadsheet.constants';
 
 export interface ISpreadsheetReducerState {
@@ -55,13 +57,12 @@ const disableAllCells = (state: ISpreadsheetReducerState) => {
   };
 };
 
-// Todo: type action
-const spreadsheetReducer = (state = DEFAULT_STATE, action: any) => {
+const spreadsheetReducer = (state = DEFAULT_STATE, action: PayloadAction<ISpreadsheetAction>) => {
   switch (action.type) {
     case spreadsheetConstants.SPREADSHEET_ON_CELL_VALUE_CHANGE:
-      return updateCell(state, action.cellId, action.newValue);
+      return updateCell(state, action.payload.cellId, action.payload.newValue);
     case spreadsheetConstants.SPREASHEET_ON_CELL_MODE_CHANGE:
-      return updateCell(disableAllCells(state), action.cellId, undefined, action.newMode);
+      return updateCell(disableAllCells(state), action.payload.cellId, undefined, action.payload.newMode);
     default:
       return state;
   }

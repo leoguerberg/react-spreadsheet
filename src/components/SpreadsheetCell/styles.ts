@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { ISpreadsheetCellWrapperProps } from './types';
+import { ISpreadsheetCellLabelProps, ISpreadsheetCellWrapperProps } from './types';
 
 export const Wrapper = styled.div<ISpreadsheetCellWrapperProps>`
   width: 100%;
@@ -8,11 +8,16 @@ export const Wrapper = styled.div<ISpreadsheetCellWrapperProps>`
   overflow: hidden;
 `;
 
-export const Label = styled.div`
+export const Label = styled.div<ISpreadsheetCellLabelProps>`
   display: flex;
   height: 100%;
   align-items: center;
   text-align: left;
+  white-space: nowrap;
+  ${(props) =>
+    props.isError &&
+    `
+  color: red`}
 `;
 
 export const Input = styled.input`

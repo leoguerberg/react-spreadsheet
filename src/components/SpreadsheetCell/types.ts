@@ -1,3 +1,4 @@
+import { boolean } from 'mathjs';
 import { CellModes, ICellId } from '../../interfaces/Cell';
 
 export interface ISpreadsheetCellProps {
@@ -9,4 +10,8 @@ export interface ISpreadsheetCellProps {
 
 export interface ISpreadsheetCellWrapperProps {
   isEditMode: boolean;
+}
+
+export interface ISpreadsheetCellLabelProps {
+  isError: boolean;
 }

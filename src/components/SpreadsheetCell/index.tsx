@@ -48,7 +48,9 @@ const SpreadsheetCell = (props: ISpreadsheetCellProps) => {
           data-cell-id={cellId}
         />
       ) : (
-        <Label data-cell-id={cellId}>{evaluatedValue}</Label>
+        <Label data-cell-id={cellId} isError={evaluatedValue === '!ERROR'}>
+          {evaluatedValue}
+        </Label>
       )}
     </Wrapper>
   );
